@@ -5,7 +5,6 @@ import * as action from '../../actions/todo';
 function Header(props) {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
-  // const { addTodo, isCheckedAll } = props;
   const onAddTodo = (e) => {
     e.preventDefault();
     if (text) {
@@ -14,7 +13,7 @@ function Header(props) {
           id: new Date().valueOf(),
           name: text,
           status: false,
-          editing: false,
+          isEditing: false,
         })
       );
       setText('');
@@ -22,11 +21,12 @@ function Header(props) {
   };
   return (
     <header className='header'>
-      <h1 className='absolute -top-24 w-full text-8xl font-light text-center text-pink-200'>todos</h1>
+      <h1 className='absolute -top-24 w-full text-8xl font-light text-center text-pink-100'>todos</h1>
       <form onSubmit={onAddTodo}>
         <input
-          className='new-todo'
+          className='new-todo italic'
           value={text}
+          placeholder='What needs to be done?'
           onChange={(e) => setText(e.target.value)}
           // onKeyPress={(e) => onAddTodo(e)}
           // checked={isCheckedAll}
