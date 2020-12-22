@@ -20,7 +20,7 @@ function Header(props) {
     }
   };
   return (
-    <header className='header'>
+    <header>
       <h1 className='absolute -top-24 w-full text-8xl font-light text-center text-pink-100'>todos</h1>
       <form onSubmit={onAddTodo}>
         <input
@@ -28,8 +28,6 @@ function Header(props) {
           value={text}
           placeholder='What needs to be done?'
           onChange={(e) => setText(e.target.value)}
-          // onKeyPress={(e) => onAddTodo(e)}
-          // checked={isCheckedAll}
         />
       </form>
     </header>

@@ -35,24 +35,10 @@ export const completeTodo = (id) => {
   };
 };
 
-export const filterAllTodo = (filter) => {
+export const filterTodo = (status) => {
   return {
-    type: ACTION.FILTER_ALL_TODO,
-    payload: filter,
-  };
-};
-
-export const filterActiveTodo = (filter) => {
-  return {
-    type: ACTION.FILTER_ACTIVE_TODO,
-    payload: filter,
-  };
-};
-
-export const filterCompletedTodo = (filter) => {
-  return {
-    type: ACTION.FILTER_COMPLETED_TODO,
-    payload: filter,
+    type: ACTION.FILTER_TODO,
+    payload: status,
   };
 };
 

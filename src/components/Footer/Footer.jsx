@@ -2,19 +2,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as action from '../../actions/todo';
 
-function Footer(props) {
+function Footer() {
   const dispatch = useDispatch();
   const { todoReducer } = useSelector((state) => state);
   const items = todoReducer.data;
   const itemsLeft = items.filter((todo) => todo.status === false);
-  const onFilterAll = () => {
-    dispatch(action.filterAllTodo('ALL'));
-  };
-  const onFilterActive = () => {
-    dispatch(action.filterActiveTodo('ACTIVE'));
-  };
-  const onFilterCompleted = () => {
-    dispatch(action.filterCompletedTodo('COMPLETED'));
+  const onFilter = (status) => {
+    dispatch(action.filterTodo(status));
   };
   const onClearCompleted = () => {
     dispatch(action.clearComplete());
@@ -23,43 +17,58 @@ function Footer(props) {
   return (
     <>
       {items.length < 1 ? null : (
-        <footer className='footer'>
-          <span className='todo-count'>
+        <footer className='text-gray-500 py-2.5 px-4 h-11 text-center border-solid border-t'>
+          <span className='float-left text-left'>
             <strong>{itemsLeft.length}</strong>
             <span>{itemsLeft.length <= 1 ? ' item' : ' items'}</span>
             <span> left</span>
           </span>
-          <ul className='filters'>
-            <li>
+          <ul className='m-0 p-0 list-none absolute right-0 left-0'>
+            <li className='inline'>
               <a
                 href='#/'
-                onClick={onFilterAll}
-                className={`${todoReducer.filter === 'ALL' ? 'selected' : ''}`}
+                onClick={() => onFilter('ALL')}
+                className={`${
+                  todoReducer.filter === 'ALL'
+                    ? 'm-0.5 py-0.75 px-2 no-underline border border-solid rounded border-red-100'
+                    : 'm-2'
+                }`}
               >
                 All
               </a>
             </li>
-            <li>
+            <li className='inline'>
               <a
                 href='#/'
-                onClick={onFilterActive}
-                className={`${todoReducer.filter === 'ACTIVE' ? 'selected' : ''}`}
+                onClick={() => onFilter('ACTIVE')}
+                className={`${
+                  todoReducer.filter === 'ACTIVE'
+                    ? 'm-0.5 py-0.75 px-2 no-underline border border-solid rounded border-red-100'
+                    : 'm-2'
+                }`}
               >
                 Active
               </a>
             </li>
-            <li>
+            <li className='inline'>
               <a
                 href='#/'
-                onClick={onFilterCompleted}
-                className={`${todoReducer.filter === 'COMPLETED' ? 'selected' : ''}`}
+                onClick={() => onFilter('COMPLETED')}
+                className={`${
+                  todoReducer.filter === 'COMPLETED'
+                    ? 'm-0.5 py-0.75 px-2 no-underline border border-solid rounded border-red-100'
+                    : 'm-2'
+                }`}
               >
                 Completed
               </a>
             </li>
           </ul>
           {items.length > itemsLeft.length ? (
-            <button className='clear-completed' onClick={onClearCompleted}>
+            <button
+              className='float-right relative no-underline cursor-pointer'
+              onClick={onClearCompleted}
+            >
               Clear completed
             </button>
           ) : null}

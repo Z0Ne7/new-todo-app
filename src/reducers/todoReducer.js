@@ -2,7 +2,10 @@ import produce from 'immer';
 import { ACTION } from '../constants/actionTypes';
 
 const initialState = {
-  data: [],
+  data: [
+    { id: 1, name: 'To do 1', status: true, isEditing: false },
+    { id: 2, name: 'To do 2', status: false, isEditing: false },
+  ],
   filter: 'ALL',
 };
 
@@ -38,17 +41,9 @@ const todoReducer = (state = initialState, action) => {
         });
         findTodo.status = !findTodo.status;
       });
-    case ACTION.FILTER_ALL_TODO:
+    case ACTION.FILTER_TODO:
       return produce(state, (draft) => {
-        draft.filter = 'ALL';
-      });
-    case ACTION.FILTER_ACTIVE_TODO:
-      return produce(state, (draft) => {
-        draft.filter = 'ACTIVE';
-      });
-    case ACTION.FILTER_COMPLETED_TODO:
-      return produce(state, (draft) => {
-        draft.filter = 'COMPLETED';
+        draft.filter = action.payload;
       });
     case ACTION.CLEAR_COMPLETED:
       return produce(state, (draft) => {
