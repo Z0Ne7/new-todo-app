@@ -55,3 +55,9 @@ export const filterCompletedTodo = (filter) => {
     payload: filter,
   };
 };
+
+export const clearComplete = () => {
+  return {
+    type: ACTION.CLEAR_COMPLETED,
+  };
+};
